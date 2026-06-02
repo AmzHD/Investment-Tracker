@@ -1,11 +1,25 @@
-print("Investment Tracker is running...")
+import json
 
-watchlist = []
+DATA_FILE = "watchlist.json"
+
+
+def load_watchlist():
+    try:
+        with open(DATA_FILE, "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
+def save_watchlist():
+    with open(DATA_FILE, "w") as file:
+        json.dump(watchlist, file)
+
+watchlist = load_watchlist()
 
 def show_menu():
     print("\n ===== INVESTMENT TRACKER =====")
     print("1. View Watchlist")
-    print("2. Add Watchlist")
+    print("2. Add Company")
     print("3. Exit")
 
 def view_watchlist():
@@ -19,6 +33,7 @@ def view_watchlist():
 def add_company():
     name = input("\nEnter company name: ")
     watchlist.append(name)
+    save_watchlist()
     print(f"{name} added to watchlist")
 
 while True:
