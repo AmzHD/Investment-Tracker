@@ -20,7 +20,8 @@ def show_menu():
     print("\n ===== INVESTMENT TRACKER =====")
     print("1. View Watchlist")
     print("2. Add Company")
-    print("3. Exit")
+    print("3. Remove Company")
+    print("4. Exit")
 
 def view_watchlist():
     if len(watchlist) == 0:
@@ -36,6 +37,15 @@ def add_company():
     save_watchlist()
     print(f"{name} added to watchlist")
 
+def remove_company():
+    name = input("\nEnter company name: ")
+    if name in watchlist:
+        watchlist.remove(name)
+        save_watchlist()
+        print(f"{name} removed from watchlist")
+    else:
+        print(f"Company {name} not found in watchlist")
+
 while True:
     show_menu()
     choice = input("\nChoose an option (1-3): ")
@@ -44,7 +54,9 @@ while True:
     elif choice == "2":
         add_company()
     elif choice == "3":
-        print("Exiting Investment Tracker")
+        remove_company()
+    elif choice == "4":
+        print("\n Exiting Investment Tracker")
         break
     else:
         print("Invalid option. Try again")
